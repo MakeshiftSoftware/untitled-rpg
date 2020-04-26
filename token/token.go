@@ -12,7 +12,7 @@ type Provider struct {
 	encryptionKey string // encryptionKey is the secret key used when issuing and verifying auth tokens.
 }
 
-// NewProvider creates a new token provider with the provided key.
+// NewProvider initializes and returns a new token provider with the provided key.
 func NewProvider(encryptionKey string) *Provider {
 	return &Provider{
 		encryptionKey: encryptionKey,

@@ -16,7 +16,7 @@ type AuthService struct {
 	tokenProvider *token.Provider     // tokenProvider is used to generate a new auth token following a successful login.
 }
 
-// NewAuthService creates a new auth service.
+// NewAuthService initializes and returns a new auth service.
 func NewAuthService(store *store.AccountStore, tokenProvider *token.Provider) *AuthService {
 	return &AuthService{
 		store:         store,
@@ -29,7 +29,7 @@ func (s *AuthService) Register(router *mux.Router) {
 	router.HandleFunc("/authenticate", s.authenticate).Methods(http.MethodPost)
 }
 
-// authenticate is a route that validates an email and password combination and
+// authenticate is an http handler that validates an email and password combination and
 // returns an auth token that can be used to interact with the server.
 func (s *AuthService) authenticate(w http.ResponseWriter, r *http.Request) {
 	var checkAccount domain.Account

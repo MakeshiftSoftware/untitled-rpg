@@ -22,7 +22,7 @@ type AccountStore struct {
 	db *sqlx.DB
 }
 
-// NewAccountStore initializes an account store with the provided db handle.
+// NewAccountStore initializes and returns a new account store with the provided db handle.
 func NewAccountStore(db *sqlx.DB) *AccountStore {
 	return &AccountStore{
 		db: db,

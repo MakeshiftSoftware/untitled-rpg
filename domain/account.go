@@ -14,7 +14,7 @@ type Account struct {
 	Password string `json:"password,omitempty" db:"password" valid:"matches(12345)"`
 }
 
-// MarshalJSON is a custom Account json marshaller that omits the password field.
+// MarshalJSON is a custom json marshaller for Account that omits the password field.
 func (account Account) MarshalJSON() ([]byte, error) {
 	type AccountAlias Account
 	return json.Marshal(&struct {
@@ -35,13 +35,13 @@ func (account *Account) HashPassword() error {
 	return nil
 }
 
-// CheckPassword validates a password against an account's hashed password.
+// CheckPassword validates a password against the hashed account password.
 func (account Account) CheckPassword(password string) bool {
 	err := bcrypt.CompareHashAndPassword([]byte(account.Password), []byte(password))
 	return err == nil
 }
 
-// NormalizeEmail normalizes the account email.
+// NormalizeEmail normalizes the account email address.
 func (account *Account) NormalizeEmail() error {
 	normalizedEmail, err := govalidator.NormalizeEmail(account.Email)
 	if err != nil {

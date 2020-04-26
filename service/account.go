@@ -15,7 +15,7 @@ type AccountService struct {
 	store *store.AccountStore // store is the account store used to access and save account data.
 }
 
-// NewAccountService creates a new account service.
+// NewAccountService initializes and returns a new account service.
 func NewAccountService(store *store.AccountStore) *AccountService {
 	return &AccountService{
 		store: store,
@@ -27,7 +27,7 @@ func (s *AccountService) Register(router *mux.Router) {
 	router.HandleFunc("/accounts", s.createAccount).Methods(http.MethodPost)
 }
 
-// createAccount is a route that creates a new account.
+// createAccount is an http handler that creates a new account.
 func (s *AccountService) createAccount(w http.ResponseWriter, r *http.Request) {
 	var account domain.Account
 
